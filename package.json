@@ -1,5 +1,5 @@
 {
-  "name": "r-cli",
+  "name": "lovelope-react-cli",
   "version": "0.0.1",
   "description": "A cli for react-starter.",
   "bin": {
