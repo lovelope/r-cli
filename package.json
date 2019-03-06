@@ -1,0 +1,72 @@
+{
+  "name": "r-cli",
+  "version": "0.0.1",
+  "description": "A cli for react-starter.",
+  "bin": {
+    "r-cli": "bin/r-cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lovelope/r-cli.git"
+  },
+  "keywords": [
+    "react",
+    "cli"
+  ],
+  "author": "lovelope <lovelope@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lovelope/r-cli/issues"
+  },
+  "homepage": "https://github.com/lovelope/r-cli#readme",
+  "devDependencies": {
+    "eslint": "^5.15.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4"
+  },
+  "engines": {
+    "node": ">=8.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "post-commit": "git update-index --again"
+    }
+  },
+  "lint-staged": {
+    "ignore": [
+      "package.json"
+    ],
+    "linters": {
+      "*.{js,jsx}": [
+        "eslint --no-ignore --fix",
+        "git add --force"
+      ],
+      "*.{json,md}": [
+        "prettier --write",
+        "git add --force"
+      ],
+      "*.{css,less}": [
+        "stylelint --syntax less",
+        "git add --force"
+      ]
+    }
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "download-git-repo": "^1.1.0",
+    "inquirer": "^6.2.2",
+    "log-symbols": "^2.2.0",
+    "ora": "^3.2.0",
+    "semver": "^5.6.0"
+  },
+  "template": {
+    "default": "direct:https://github.com/lovelope/react-project.git#feature/antd",
+    "typescript": "direct:https://github.com/lovelope/react-project.git#feature/ts"
+  }
+}
