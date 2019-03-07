@@ -9,6 +9,7 @@ const fs = require('fs');
 const ora = require('ora');
 const symbols = require('log-symbols');
 const chalk = require('chalk');
+const validate = require('validate-npm-package-name');
 
 const pkg = require('../package.json');
 
@@ -20,6 +21,15 @@ program
   .command('init <name>')
   .option('-t, --typescript', '创建 typescript 项目')
   .action(name => {
+    console.log(name);
+    const valid = validate(name);
+    const { validForNewPackages } = valid;
+    if (!validForNewPackages) {
+      // 错误提示项目名称不合法
+      console.log(symbols.error, chalk.red('项目名称不合法'));
+      process.exit();
+    }
+
     if (!fs.existsSync(name)) {
       inquirer
         .prompt([
