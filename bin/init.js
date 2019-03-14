@@ -5,6 +5,8 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const symbols = require('log-symbols');
 
+const shelljs = require('shelljs');
+
 const config = require('../config');
 const getQuestions = require('./questions');
 
@@ -12,6 +14,7 @@ git.plugins.set('fs', fs);
 
 const { remote: gitRemote, branch: gitBranchs } = config.git;
 
+// eslint-disable-next-line no-unused-vars
 function assert(v) {
   console.dir(v);
   process.exit();
@@ -24,15 +27,15 @@ module.exports = function init(program, name) {
       getQuestions({ hasName: Boolean(name), hasType: program.typescript })
     )
     .then(answers => {
+      const projectType = program.typescript ? 'ts' : 'default';
       // 项目配置
       const meta = {
         name,
-        projectType: program.typescript ? 'ts' : 'default',
         ...answers,
       };
 
       // git仓库分支
-      const branch = gitBranchs[meta.projectType];
+      const branch = gitBranchs[projectType];
 
       // 开始下载动画
       const spinner = ora('正在下载模板...');
@@ -45,7 +48,7 @@ module.exports = function init(program, name) {
           singleBranch: true, // 单分支克隆
           depth: 1, // 浅克隆
         })
-        .then(() => {
+        .then(async () => {
           // 下载成功调用
           spinner.succeed();
           const fileName = `${name}/package.json`;
@@ -55,6 +58,7 @@ module.exports = function init(program, name) {
             const result = { ...json, ...meta };
             fs.writeFileSync(fileName, JSON.stringify(result, null, 2));
           }
+          shelljs.rm('-rf', `${name}/.git`);
           console.log(symbols.success, chalk.green('项目初始化完成'));
         })
         .catch(err => {
