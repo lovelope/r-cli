@@ -20,14 +20,14 @@ function assert(v) {
   process.exit();
 }
 
-module.exports = function init(program, name) {
+module.exports = function init(program, cmd, name) {
   inquirer
     .prompt(
       // TODO: hasType 其它类型
-      getQuestions({ hasName: Boolean(name), hasType: program.typescript })
+      getQuestions({ hasName: Boolean(name), hasType: cmd.typescript })
     )
     .then(answers => {
-      const projectType = program.typescript ? 'ts' : 'default';
+      const projectType = cmd.typescript ? 'ts' : 'default';
       // 项目配置
       const meta = {
         name,

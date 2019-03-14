@@ -18,7 +18,7 @@ program
   .usage('<command> [options]')
   .command('init <name>')
   .option('-t, --typescript', '创建 typescript 项目')
-  .action(name => {
+  .action((name, cmd) => {
     const valid = validate(name);
     const { validForNewPackages } = valid;
     if (!validForNewPackages) {
@@ -27,7 +27,7 @@ program
       process.exit();
     }
     if (!fs.existsSync(name)) {
-      init(program, name);
+      init(program, cmd, name);
     } else {
       // 错误提示项目已存在，避免覆盖原有项目
       console.log(symbols.error, chalk.red('项目已存在'));
