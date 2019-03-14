@@ -58,7 +58,26 @@ module.exports = function init(program, cmd, name) {
             const result = { ...json, ...meta };
             fs.writeFileSync(fileName, JSON.stringify(result, null, 2));
           }
-          shelljs.rm('-rf', `${name}/.git`);
+          // 进入文件夹
+          shelljs.cd(name);
+          // 删除旧的 git 仓库
+          shelljs.rm('-rf', '.git');
+
+          // 初始化 git
+          await git.init({ dir: './' });
+
+          // 开始下载动画
+          const installSpinner = ora('正在安装依赖...');
+          installSpinner.start();
+          // 执行 `npm i`
+          if (shelljs.exec('npm i --loglevel=silent').code !== 0) {
+            // 下载失败调用
+            installSpinner.fail();
+            console.log(symbols.error, chalk.red('项目依赖安装失败'));
+            shelljs.exit(1);
+          }
+          installSpinner.succeed();
+          console.log(symbols.success, chalk.green('项目依赖安装完成'));
           console.log(symbols.success, chalk.green('项目初始化完成'));
         })
         .catch(err => {
