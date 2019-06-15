@@ -1,34 +1,23 @@
 {
   "name": "@lovelope/r-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A cli for react-starter.",
-  "bin": {
-    "r-cli": "bin/r-cli.js"
+  "keywords": [
+    "cli",
+    "react"
+  ],
+  "homepage": "https://github.com/lovelope/r-cli#readme",
+  "bugs": {
+    "url": "https://github.com/lovelope/r-cli/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lovelope/r-cli.git"
   },
-  "keywords": [
-    "react",
-    "cli"
-  ],
-  "author": "lovelope <lovelope@qq.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/lovelope/r-cli/issues"
-  },
-  "homepage": "https://github.com/lovelope/r-cli#readme",
-  "devDependencies": {
-    "eslint": "^5.15.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "^1.16.4"
-  },
-  "engines": {
-    "node": ">=8.9"
+  "author": "lovelope <lovelope@qq.com>",
+  "bin": {
+    "r-cli": "bin/r-cli.js"
   },
   "husky": {
     "hooks": {
@@ -58,14 +47,25 @@
   },
   "dependencies": {
     "chalk": "^2.4.2",
-    "commander": "^2.19.0",
-    "fs-extra": "^7.0.1",
-    "inquirer": "^6.2.2",
-    "isomorphic-git": "^0.51.12",
-    "log-symbols": "^2.2.0",
-    "ora": "^3.2.0",
-    "semver": "^5.6.0",
+    "commander": "^2.20.0",
+    "fs-extra": "^8.0.1",
+    "inquirer": "^6.3.1",
+    "isomorphic-git": "^0.55.2",
+    "log-symbols": "^3.0.0",
+    "ora": "^3.4.0",
+    "semver": "^6.1.1",
     "shelljs": "^0.8.3",
     "validate-npm-package-name": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
+  },
+  "engines": {
+    "node": ">=8.9"
   }
 }
